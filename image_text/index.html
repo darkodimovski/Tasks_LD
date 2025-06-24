@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Image + Text Section</title>
+  <style>
+    :root {
+      --transition-duration: 0.4s;
+    }
+
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: #f0f0f0;
+    }
+
+    image-text-section {
+      display: block;
+      margin: 200vh 0;
+    }
+
+    .section {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity var(--transition-duration) ease, transform var(--transition-duration) ease;
+      max-width: 1440px;
+      margin: 0 auto;
+      box-sizing: border-box;
+      background: #fff;
+      border: 1px solid #ddd;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      height: 500px;
+    }
+
+    .section--visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section__image-wrapper {
+      flex: 1 1 50%;
+      height: 100%;
+    }
+
+    .section__image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .section__content {
+      flex: 1 1 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 32px;
+      box-sizing: border-box;
+    }
+
+    .section__inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 400px;
+    }
+
+    .section__description {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .section__toggle {
+      margin-top: 12px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      background-color: #0077cc;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .section__text {
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      transition: max-height var(--transition-duration) ease, opacity var(--transition-duration) ease;
+    }
+
+    .section__text--open {
+      max-height: 300px;
+      opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+      .section {
+        flex-direction: column;
+        height: auto;
+      }
+
+      .section__content {
+        padding: 24px;
+      }
+
+      .section__image-wrapper {
+        width: 100%;
+        height: auto;
+      }
+
+      .section__image {
+        height: auto;
+      }
+
+      .section__inner {
+        align-items: center;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <image-text-section></image-text-section>
+
+  <script>
+    class ImageTextSection extends HTMLElement {
+      constructor() {
+        super();
+        this.innerHTML = `
+          <section class="section">
+            <div class="section__image-wrapper">
+              <img 
+                class="section__image" 
+                src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80" 
+                alt="Team working"
+              />
+            </div>
+            <div class="section__content">
+              <div class="section__inner">
+                <div class="section__description">
+                  <p>
+                    We deliver smart solutions to modern problems. Our team works tirelessly to bring innovation into every project.
+                  </p>
+                </div>
+                <div class="section__text">
+                  <p>
+                    Our approach combines design thinking, cutting-edge technology, and a strong customer focus. Whether it's a startup MVP or an enterprise platform, we adapt to your goals and deliver value fast. We believe in transparency, iteration, and constant improvement.
+                  </p>
+                </div>
+                <button class="section__toggle">Learn more</button>
+              </div>
+            </div>
+          </section>
+        `;
+
+        const section = this.querySelector('.section');
+        const toggleBtn = section.querySelector('.section__toggle');
+        const textBlock = section.querySelector('.section__text');
+        let isOpen = false;
+
+        toggleBtn.addEventListener('click', () => {
+          textBlock.classList.toggle('section__text--open');
+          isOpen = !isOpen;
+          toggleBtn.textContent = isOpen ? 'Show less' : 'Learn more';
+        });
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                section.classList.add('section--visible');
+              } else {
+                section.classList.remove('section--visible');
+              }
+            });
+          },
+          { threshold: 0.3 }
+        );
+
+        observer.observe(section);
+      }
+    }
+
+    customElements.define('image-text-section', ImageTextSection);
+  </script>
+
+</body>
+</html>
