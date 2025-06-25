@@ -5,80 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Swiper 3 Slides</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: #f6f1eb;
-      font-family: sans-serif;
-    }
-
-    .swiper-section {
-      max-width: 1440px;
-      margin: 0 auto;
-      padding: 40px 16px;
-      position: relative;
-    }
-
-    .swiper {
-      padding-bottom: 40px;
-    }
-
-    .swiper-slide {
-      background-color: #fff;
-      border-radius: 12px;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .swiper-slide img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .swiper-button-prev,
-    .swiper-button-next {
-      color: white;
-      background: black;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
-    }
-
-
-    .swiper-button-prev::after,
-    .swiper-button-next::after {
-      font-size: 20px;
-      font-weight: bold;
-    }
-
-    .toggle-swiper {
-      display: block;
-      margin: 0 auto;
-      padding: 10px 20px;
-      font-size: 16px;
-      margin-top: 20px;
-    }
-
-    @media (max-width: 768px) {
-      .swiper-slide {
-        height: auto;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <section class="swiper-section">
     <div class="swiper-container swiper">
       <div class="swiper-wrapper">
-        <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1632765854612-9b02b6ec2b15?q=80&w=772&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Slide 1"/></div>
-        <div class="swiper-slide"><img src="https://plus.unsplash.com/premium_photo-1683140840845-073fa9638261?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Slide 2"/></div>
-        <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=776&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Slide 3"/></div>
-        <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Slide 4"/></div>
+        <div class="swiper-slide">
+          <img src="https://images.unsplash.com/photo-1632765854612-9b02b6ec2b15?q=80&w=772&auto=format&fit=crop" alt="Slide 1"/>
+        </div>
+        <div class="swiper-slide">
+          <img src="https://plus.unsplash.com/premium_photo-1683140840845-073fa9638261?q=80&w=774&auto=format&fit=crop" alt="Slide 2"/>
+        </div>
+        <div class="swiper-slide">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=776&auto=format&fit=crop" alt="Slide 3"/>
+        </div>
+        <div class="swiper-slide">
+          <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=774&auto=format&fit=crop" alt="Slide 4"/>
+        </div>
       </div>
       <div class="swiper-button-prev"></div>
       <div class="swiper-button-next"></div>
@@ -88,60 +32,6 @@
   </section>
 
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script>
-    class CustomSwiperController {
-      constructor(containerSelector) {
-        this.container = document.querySelector(containerSelector);
-        this.swiperInstance = null;
-      }
-      init() {
-        if (!this.swiperInstance) {
-          this.swiperInstance = new Swiper(this.container, {
-            slidesPerView: 3,
-            spaceBetween: 24,
-            navigation: {
-              nextEl: '.swiper-button-next',
-              prevEl: '.swiper-button-prev',
-            },
-            breakpoints: {
-              0: {
-                slidesPerView: 1,
-              },
-              768: {
-                slidesPerView: 2,
-              },
-              1024: {
-                slidesPerView: 3,
-              },
-            },
-            on: {
-              slideChange: () => {
-                console.log('Active slide index:', this.swiperInstance.activeIndex);
-              }
-            }
-          });
-          console.log('Swiper initialized.');
-        }
-      }
-      destroy() {
-        if (this.swiperInstance) {
-          this.swiperInstance.destroy(true, true);
-          this.swiperInstance = null;
-          console.log('Swiper destroyed.');
-        }
-      }
-      toggle() {
-        this.swiperInstance ? this.destroy() : this.init();
-      }
-    }
-
-    const swiperController = new CustomSwiperController('.swiper');
-    swiperController.init();
-
-    document.querySelector('.toggle-swiper').addEventListener('click', () => {
-      swiperController.toggle();
-    });
-  </script>
-
+  <script src="script.js"></script>
 </body>
 </html>
