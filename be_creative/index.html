@@ -3,40 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Diaper Dash!</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f9f9f9;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
-    }
-    h1 { margin-bottom: 1rem; }
-    .baby {
-      font-size: 5rem;
-      margin-bottom: 1rem;
-    }
-    .items {
-      display: flex;
-      gap: 1rem;
-      margin-bottom: 1rem;
-    }
-    .item {
-      padding: 1rem 2rem;
-      border: none;
-      border-radius: 10px;
-      font-size: 1.1rem;
-      cursor: pointer;
-      background: #ddd;
-    }
-    .message {
-      font-weight: bold;
-      margin-top: 1rem;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h1>🍼 Diaper Dash!</h1>
@@ -48,22 +15,6 @@
   </div>
   <div class="message" id="message">Change the diaper in order!</div>
 
-  <script>
-    const correctOrder = ['wipes', 'cream', 'diaper'];
-    let currentStep = 0;
-    function selectItem(item) {
-      if (item === correctOrder[currentStep]) {
-        currentStep++;
-        if (currentStep === correctOrder.length) {
-          document.getElementById('message').innerText = "✅ Success! You're a diaper ninja!";
-          currentStep = 0;
-        }
-      } else {
-        document.getElementById('message').innerText = "💩 Oops! Baby is not happy!";
-        currentStep = 0;
-      }
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
-

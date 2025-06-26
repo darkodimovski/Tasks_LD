@@ -7,7 +7,7 @@ class CustomSwiperController {
   init() {
     if (!this.swiperInstance) {
       this.swiperInstance = new Swiper(this.container, {
-        slidesPerView: 1, // default for mobile
+        slidesPerView: 1,
         spaceBetween: 8,
         navigation: {
           nextEl: '.swiper-button-next',

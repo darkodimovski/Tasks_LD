@@ -101,7 +101,7 @@ image-text-section {
 @media (max-width: 375px) {
   .section {
     flex-direction: column;
-    height: auto; /* allow dynamic growth */
+    height: auto;
     width: 100%;
     margin: 24px 0;
     border: none;
